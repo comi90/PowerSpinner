@@ -690,6 +690,22 @@ class PowerSpinnerView : AppCompatTextView, LifecycleObserver {
     this.adapter.notifyItemSelected(index)
   }
 
+  fun updateSize() {
+    post {
+      val spinnerWidth = if (spinnerPopupWidth != NO_INT_VALUE) {
+        spinnerPopupWidth
+      } else {
+        width
+      }
+      val spinnerHeight = if (spinnerPopupHeight != NO_INT_VALUE) {
+        spinnerPopupHeight
+      } else {
+        this.binding.recyclerView.height
+      }
+      this.spinnerWindow.update(spinnerWidth, spinnerHeight)
+    }
+  }
+
   /** notifies to [PowerSpinnerView] of changed information from [PowerSpinnerInterface]. */
   fun notifyItemSelected(index: Int, changedText: CharSequence) {
     this.selectedIndex = index
